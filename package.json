@@ -1,0 +1,77 @@
+{
+	"name": "pi-managed-tools",
+	"version": "0.15.0",
+	"description": "Keeps pi's managed binaries, and a few PATH-only extras, at the latest upstream release",
+	"keywords": [
+		"pi-package",
+		"pi",
+		"pi-coding-agent",
+		"fd",
+		"ripgrep",
+		"bat",
+		"prek",
+		"rtk",
+		"just",
+		"gron",
+		"shellcheck",
+		"ast-grep",
+		"ninja",
+		"jq",
+		"yq",
+		"fzf",
+		"uv",
+		"gh",
+		"bd",
+		"agent-browser",
+		"ruff",
+		"mise",
+		"scc",
+		"duckdb",
+		"miller",
+		"sd",
+		"difftastic",
+		"busybox"
+	],
+	"type": "module",
+	"license": "GPL-2.0-only",
+	"pi": {
+		"extensions": [
+			"./src/extension.ts"
+		],
+		"skills": [
+			"./skills"
+		],
+		"changelogPath": "./CHANGELOG.md"
+	},
+	"files": [
+		"src/",
+		"skills/",
+		"README.md",
+		"CHANGELOG.md"
+	],
+	"scripts": {
+		"test": "node --test tests/tools.test.ts tests/extension.test.ts tests/skills.test.ts",
+		"typecheck": "tsc -p .",
+		"verify": "./scripts/verify.sh"
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-coding-agent": "*",
+		"typebox": "*"
+	},
+	"devDependencies": {
+		"@types/node": "^22.0.0",
+		"typescript": "^5.0.0"
+	},
+	"engines": {
+		"node": ">=22.19.0"
+	},
+	"author": "Robert Currie (https://github.com/rob-c)",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rob-c/pi-managed-tools.git"
+	},
+	"homepage": "https://github.com/rob-c/pi-managed-tools#readme",
+	"bugs": {
+		"url": "https://github.com/rob-c/pi-managed-tools/issues"
+	}
+}

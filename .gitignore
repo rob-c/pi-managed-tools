@@ -1,0 +1,13 @@
+node_modules/
+package-lock.json
+
+# macOS
+.DS_Store
+
+# local pi/agent tooling artifacts
+.pi/
+.probe/
+
+# logs and coverage
+*.log
+coverage/

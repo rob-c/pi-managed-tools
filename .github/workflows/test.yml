@@ -1,0 +1,28 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Windows is excluded on purpose: the tests that install and execute
+        # binaries are POSIX-only, so a Windows job would report skips as success.
+        os: [ubuntu-latest, macos-latest]
+        node: [22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # The peer dependencies are host-provided packages. They are installed here
+      # only so `tsc` can resolve pi's types; the test suite stubs pi instead.
+      - run: npm install --no-audit --no-fund --ignore-scripts
+      - run: npm test
+      - run: npm run typecheck
