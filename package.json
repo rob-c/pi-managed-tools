@@ -1,6 +1,6 @@
 {
 	"name": "pi-managed-tools",
-	"version": "0.15.0",
+	"version": "0.15.1",
 	"description": "Keeps pi's managed binaries, and a few PATH-only extras, at the latest upstream release",
 	"keywords": [
 		"pi-package",

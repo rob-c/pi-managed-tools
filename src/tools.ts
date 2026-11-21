@@ -43,6 +43,7 @@ import {
 	readdirSync,
 	renameSync,
 	rmSync,
+	statSync,
 	writeFileSync,
 } from "node:fs";
 import { arch, platform } from "node:os";
@@ -1361,6 +1362,13 @@ function localState(tool: ManagedTool, binDir: string, plat: string, state: Chec
 			// when the primary is there: otherwise this is a fresh install, not
 			// damage, and a repair would never be the right action.
 			if (!isPrimary && installed) problems.push(`${name} missing`);
+			continue;
+		}
+		// Check the size before trusting the probe: Linux falls back to /bin/sh for a
+		// file without a valid executable header, so a zero-length binary "runs" and
+		// exits 0 there while macOS reports ENOEXEC. Neither should read as healthy.
+		if (statSync(binaryPath).size === 0) {
+			problems.push(`${name} is empty`);
 			continue;
 		}
 		const probe = probeBinary(binaryPath, binDir);

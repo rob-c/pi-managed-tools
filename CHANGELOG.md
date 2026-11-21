@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.15.1]
+
+- Detect a zero-length managed binary as damaged. On Linux, executing a file with no
+  valid executable header falls back to `/bin/sh`, so an empty binary "runs" and
+  exits 0 — the probe reported it healthy and no repair would ever be offered. macOS
+  returns `ENOEXEC` instead, which is why this only surfaced on the first Linux CI
+  run. `localState()` now checks the file size before trusting the probe.
+- Found by the new CI matrix: the macOS job passed while the Ubuntu job failed on the
+  one test that uses an empty file. First evidence this repository builds and passes
+  anywhere other than the author's machine.
+
 ## [0.15.0]
 
 - Relicensed from MIT to **GPL-2.0-only**, before the first commit so no published

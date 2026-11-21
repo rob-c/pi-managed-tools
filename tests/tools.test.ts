@@ -1091,7 +1091,9 @@ describe("repair", () => {
 		const { fetchImpl } = fakeFetch({ latest: FIXTURE_VERSIONS });
 		const report = await inspectTools({ binDir, fetchImpl, ...DARWIN_ARM });
 		const just = report.tools.find((tool) => tool.tool === "just");
-		assert.match(just?.damaged ?? "", /does not execute/);
+		// Empty is detected by size, because an empty file executes successfully
+		// through the /bin/sh fallback on Linux.
+		assert.match(just?.damaged ?? "", /is empty|does not execute/);
 	});
 });
 

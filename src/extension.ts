@@ -51,7 +51,7 @@ import {
 /** Same location pi's `getBinDir()` resolves, including $PI_CODING_AGENT_DIR. */
 const BIN_DIR = join(getAgentDir(), "bin");
 const STATUS_KEY = "pi-managed-tools";
-const USER_AGENT = `pi-managed-tools/0.15.0 (pi ${VERSION})`;
+const USER_AGENT = `pi-managed-tools/0.15.1 (pi ${VERSION})`;
 const TOOL_LIST = MANAGED_TOOL_IDS.map((id) => MANAGED_TOOLS[id].name).join(", ");
 
 /**
